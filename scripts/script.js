@@ -10,10 +10,10 @@ $(function() {
 			template.setAttribute("onclick", "location.href='help.html'");
 			template.innerHTML = "Help";
 		} else if (i == 2){
-			template.setAttribute("onclick", "location.href='index.html'");
+			template.setAttribute("onclick", "location.href='about.html'");
 			template.innerHTML = "About";
 		} else {
-			template.setAttribute("onclick", "location.href='index.html'");
+			template.setAttribute("onclick", "location.href='license.html'");
 			template.innerHTML = "License";
 		}
 		parent.appendChild(template);
