@@ -1,13 +1,4 @@
 $(function() {
-	$("#toggle-button").click(function(){
-    	$("#sidebar-wrapper").animate({left:'+=200'}, 'fast');
-	});
-	$("#toggle-button").focusout(function(){
-		$("#sidebar-wrapper").animate({left:'-=200'}, 'fast');
-	});
-});
-
-window.onload = function(){
 	for(var i = 0; i < 4; i++){
 		var parent = document.getElementById("sidebar");
 		var template = document.createElement("button");
@@ -27,4 +18,10 @@ window.onload = function(){
 		}
 		parent.appendChild(template);
 	}
-}
+	$("#toggle-button").click(function(){
+    	$("#sidebar-wrapper").animate({left:'+=200'}, 'fast');
+	});
+	$("#toggle-button").focusout(function(){
+		$("#sidebar-wrapper").animate({left:'-=200'}, 'fast');
+	});
+});
