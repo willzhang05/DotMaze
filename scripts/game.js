@@ -7,8 +7,8 @@ var w = window.innerWidth,
     h = window.innerHeight;
 var left = 65,
     right = 68,
-    up = 83,
-    down = 87;
+    up = 87,
+    down = 83;
 var dotX = 125,
     dotY = 125,
     velX = 0,
@@ -19,7 +19,7 @@ var dotX = 125,
         up: false,
         down: false
     },
-    maxSpeed = 5;
+    maxSpeed = 4;
 var renderer = PIXI.autoDetectRenderer(w, h, {
     backgroundColor: 0x607D8B
 });
@@ -66,15 +66,15 @@ function checkKey() {
         if (velX < maxSpeed) {
             velX += 0.5;
         }
-    } else if (key[up]) {
-        //velY = 10;
-        if (velY < maxSpeed) {
-            velY += 0.5;
-        }
-    } else if (key[down]) {
+	} else if (key[up]) {
         //velY = -10;
         if (velY > -maxSpeed) {
             velY -= 0.5;
+        }
+    } else if (key[down]) {
+        //velY = 10;
+        if (velY < maxSpeed) {
+            velY += 0.5;
         }
     }
 }

@@ -10,7 +10,6 @@
     <title>Help</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="../scripts/script.js"></script>
 <body>
 	<div id="sidebar-wrapper">
 		<div id="sidebar">
@@ -26,9 +25,41 @@
         </div>
 		<div id="content-wrapper">
             <div id="content">
-                	
+				<h1>Instructions</h1>
+                <div id="text">
+					<span>Use the WASD keys to guide the dot around the maze.</span>
+					<div id="wasd-wrapper">
+						<div id="wasd-top">
+							<button id="w-wasd" class="wasd-key">W</button>
+						</div>
+						<div id="wasd-bottom">
+							<button id="a-wasd" class="wasd-key">A</button>
+							<button id="s-wasd" class="wasd-key">S</button>
+							<button id="d-wasd" class="wasd-key">D</button>
+						</div>
+					</div>
+				</div>
+				<script>
+					var keyDict = {
+						65: "a", //left
+						68: "d", //right
+						87: "w", //up
+						83: "s", //down
+					}
+					$(function() {
+						$(document).on('keydown', function(e) {
+							var code = e.keyCode ? e.keyCode : e.which;
+							$("#" + keyDict[code] + "-wasd").css("background-color", "#BDBDBD");
+						});
+						$(document).on('keyup', function(e) {
+							var code = e.keyCode ? e.keyCode : e.which;
+							$("#" + keyDict[code] + "-wasd").css("background-color", "#eee");
+						});
+					});
+				</script>
             </div>
         </div>
     </div>
 </body>
+<script src="../scripts/script.js"></script>
 </html>

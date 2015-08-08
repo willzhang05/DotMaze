@@ -1,5 +1,4 @@
-$(function() {
-	for(var i = 0; i < 4; i++){
+for(var i = 0; i < 4; i++){
 		var parent = document.getElementById("sidebar");
 		var template = document.createElement("button");
 		template.classList.add("menu-buttons");
@@ -17,7 +16,8 @@ $(function() {
 			template.innerHTML = "License";
 		}
 		parent.appendChild(template);
-	}
+}
+$(function() {
 	$("#toggle-button").click(function(){
     	$("#sidebar-wrapper").animate({left:'+=200'}, 'fast');
 	});
