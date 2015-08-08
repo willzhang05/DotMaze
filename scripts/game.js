@@ -51,6 +51,8 @@ function gameLoop() {
     checkKey();
     dotX += velX;
     dotY += velY;
+	velX *= 0.99;
+	velY *= 0.99;
     dot.position.x = dotX;
     dot.position.y = dotY;
     renderer.render(stage);
@@ -61,17 +63,20 @@ function checkKey() {
         if (velX > -maxSpeed) {
             velX -= 0.5;
         }
-    } else if (key[right]) {
+    } 
+	if (key[right]) {
         //velX = 10;
         if (velX < maxSpeed) {
             velX += 0.5;
         }
-	} else if (key[up]) {
+	} 
+	if (key[up]) {
         //velY = -10;
         if (velY > -maxSpeed) {
             velY -= 0.5;
         }
-    } else if (key[down]) {
+    } 
+	if (key[down]) {
         //velY = 10;
         if (velY < maxSpeed) {
             velY += 0.5;
