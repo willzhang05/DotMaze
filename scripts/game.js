@@ -3,6 +3,8 @@
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
 })();
+$(".pause-buttons").css("cursor", "default");
+$(".pause-buttons").attr("disabled", "true");
 var w = window.innerWidth,
     h = window.innerHeight;
 var left = 65,
@@ -19,14 +21,15 @@ var dotX = 125,
         up: false,
         down: false
     },
-    maxSpeed = 4;
+    maxSpeed = 5;
+var pauseActive = false;
 var renderer = PIXI.autoDetectRenderer(w, h, {
     backgroundColor: 0x607D8B
 });
 renderer.view.id = "game";
 document.getElementById("content").appendChild(renderer.view);
 var stage = new PIXI.Container();
-var texture = PIXI.Texture.fromImage('http://i.imgur.com/J8xP8Ok.png');
+var texture = PIXI.Texture.fromImage('http://i.imgur.com/ndOOZq4.png');
 var dot = new PIXI.Sprite(texture);
 dot.anchor.x = 0.5;
 dot.anchor.y = 0.5;
@@ -38,6 +41,11 @@ window.onresize = function(e) {
     var h = window.innerHeight;
 }
 window.onkeydown = function(e) {
+	if(e.keyCode == 27){
+		(function(){
+			pause();
+		})();
+	}
     key[e.keyCode] = true;
 }
 window.onkeyup = function(e) {
@@ -57,6 +65,20 @@ function gameLoop() {
     dot.position.y = dotY;
     renderer.render(stage);
     requestAnimationFrame(gameLoop);
+}
+function pause(){
+	if (pauseActive){
+		$(".pause-buttons").css("cursor", "default");
+		$(".pause-buttons").attr("disabled", "true");
+		$("#pause").css("opacity", "0");
+		$("#pause-wrapper").css("background-color", "rgba(0, 0, 0, 0)");
+	} else if (!pauseActive){
+		$(".pause-buttons").css("cursor", "pointer");
+		$(".pause-buttons").removeAttr("disabled");
+		$("#pause").css("opacity", "1");
+		$("#pause-wrapper").css("background-color", "rgba(0, 0, 0, 0.5)");
+	}
+	pauseActive = !pauseActive;
 }
 function checkKey() {
     if (key[left]) {
@@ -82,4 +104,7 @@ function checkKey() {
             velY += 0.5;
         }
     }
+}
+function renderMaze(){
+	
 }
