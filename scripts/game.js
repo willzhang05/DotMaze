@@ -41,11 +41,9 @@ window.onresize = function(e) {
     var h = window.innerHeight;
 }
 window.onkeydown = function(e) {
-	if(e.keyCode == 27){
-		(function(){
-			pause();
-		})();
-	}
+    if (e.keyCode == 27) {
+        pause();
+    }
     key[e.keyCode] = true;
 }
 window.onkeyup = function(e) {
@@ -53,58 +51,63 @@ window.onkeyup = function(e) {
 }
 window.onload = function init() {
     renderer.render(stage);
-    gameLoop();
 }
+
 function gameLoop() {
     checkKey();
     dotX += velX;
     dotY += velY;
-	velX *= 0.99;
-	velY *= 0.99;
+    velX *= 0.99;
+    velY *= 0.99;
     dot.position.x = dotX;
     dot.position.y = dotY;
     renderer.render(stage);
     requestAnimationFrame(gameLoop);
 }
-function pause(){
-	if (pauseActive){
-		$(".pause-buttons").css("cursor", "default");
-		$(".pause-buttons").attr("disabled", "true");
-		$("#pause").css("opacity", "0");
-		$("#pause-wrapper").css("background-color", "rgba(0, 0, 0, 0)");
-	} else if (!pauseActive){
-		$(".pause-buttons").css("cursor", "pointer");
-		$(".pause-buttons").removeAttr("disabled");
-		$("#pause").css("opacity", "1");
-		$("#pause-wrapper").css("background-color", "rgba(0, 0, 0, 0.5)");
-	}
-	pauseActive = !pauseActive;
+
+function pause() {
+    if (!$("#start-button").length) {
+        if (pauseActive) {
+            $(".pause-buttons").css("cursor", "default");
+            $(".pause-buttons").attr("disabled", "true");
+            $("#pause").css("opacity", "0");
+            $("#pause-wrapper").css("background-color", "rgba(0, 0, 0, 0)");
+        } else if (!pauseActive) {
+            $(".pause-buttons").css("cursor", "pointer");
+            $(".pause-buttons").removeAttr("disabled");
+            $("#pause").css("opacity", "1");
+            $("#pause-wrapper").css("background-color", "rgba(0, 0, 0, 0.5)");
+        }
+        pauseActive = !pauseActive;
+    }
 }
+
 function checkKey() {
     if (key[left]) {
         if (velX > -maxSpeed) {
             velX -= 0.5;
         }
-    } 
-	if (key[right]) {
+    }
+    if (key[right]) {
         //velX = 10;
         if (velX < maxSpeed) {
             velX += 0.5;
         }
-	} 
-	if (key[up]) {
+    }
+    if (key[up]) {
         //velY = -10;
         if (velY > -maxSpeed) {
             velY -= 0.5;
         }
-    } 
-	if (key[down]) {
+    }
+    if (key[down]) {
         //velY = 10;
         if (velY < maxSpeed) {
             velY += 0.5;
         }
     }
 }
-function renderMaze(){
-	
+
+function renderMaze() {
+
 }
