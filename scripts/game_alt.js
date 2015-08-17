@@ -7,21 +7,10 @@ $(".pause-buttons").css("cursor", "default");
 $(".pause-buttons").attr("disabled", "true");
 var w = window.innerWidth,
     h = window.innerHeight;
-var left = 65,
-    right = 68,
-    up = 87,
-    down = 83;
-var dotX = 125,
-    dotY = 125,
-    velX = 0,
-    velY = 0,
-    key = {
-        left: false,
-        right: false,
-        up: false,
-        down: false
-    },
-    maxSpeed = 5;
+window.onresize = function(e) {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+}
 var pauseActive = false;
 var renderer = PIXI.autoDetectRenderer(w, h, {
     backgroundColor: 0x607D8B
@@ -33,35 +22,44 @@ var texture = PIXI.Texture.fromImage('http://i.imgur.com/ndOOZq4.png');
 var dot = new PIXI.Sprite(texture);
 dot.anchor.x = 0.5;
 dot.anchor.y = 0.5;
-dot.position.x = dotX;
-dot.position.y = dotY;
+dot.position.x = 125;
+dot.position.y = 125;
 stage.addChild(dot);
 
-window.onresize = function(e) {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
+var target = {x: 0, y: 0};
+
+function getClickPosition(e) {
+    var xPosition = e.clientX;
+    var yPosition = e.clientY;
+    
+	target.x = xPosition;
+    target.y = yPosition;
 }
-window.onkeydown = function(e) {
-    if (e.keyCode == 27) {
-        pause();
+ 
+function getPosition(element) {
+    var xPosition = 0;
+    var yPosition = 0;
+	
+    while (element) {
+        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
     }
-    key[e.keyCode] = true;
+    return { x: xPosition, y: yPosition };
 }
-window.onkeyup = function(e) {
-    key[e.keyCode] = false;
+
+document.onclick = function(e){
+	target = new PIXI.Point();
+	getClickPosition(e)
 }
+
 window.onload = function init() {
     renderer.render(stage);
 }
 
 function gameLoop() {
-    checkKey();
-    dotX += velX;
-    dotY += velY;
-    velX *= 0.99;
-    velY *= 0.99;
-    dot.position.x = dotX;
-    dot.position.y = dotY;
+    dot.position.x += (target.x - dot.x) * 0.1;
+    dot.position.y += (target.y - dot.y) * 0.1;
     renderer.render(stage);
     requestAnimationFrame(gameLoop);
 }
@@ -83,31 +81,6 @@ function pause() {
     }
 }
 
-function checkKey() {
-    if (key[left]) {
-        if (velX > -maxSpeed) {
-            velX -= 0.5;
-        }
-    }
-    if (key[right]) {
-        //velX = 10;
-        if (velX < maxSpeed) {
-            velX += 0.5;
-        }
-    }
-    if (key[up]) {
-        //velY = -10;
-        if (velY > -maxSpeed) {
-            velY -= 0.5;
-        }
-    }
-    if (key[down]) {
-        //velY = 10;
-        if (velY < maxSpeed) {
-            velY += 0.5;
-        }
-    }
-}
 
 function renderMaze() {
 

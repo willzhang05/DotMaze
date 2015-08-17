@@ -3,25 +3,50 @@
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
     window.requestAnimationFrame = requestAnimationFrame;
 })();
+localStorage.setItem("wasdKeys", true);
+localStorage.setItem("arrowKeys", false);
+localStorage.setItem("clickTap", false);
 $(".pause-buttons").css("cursor", "default");
 $(".pause-buttons").attr("disabled", "true");
 var w = window.innerWidth,
     h = window.innerHeight;
-var left = 65,
-    right = 68,
-    up = 87,
-    down = 83;
-var dotX = 125,
-    dotY = 125,
-    velX = 0,
-    velY = 0,
-    key = {
-        left: false,
-        right: false,
-        up: false,
-        down: false
-    },
-    maxSpeed = 5;
+window.onresize = function(e) {
+    w = window.innerWidth;
+    h = window.innerHeight;
+}
+var dotX = 125;
+    dotY = 125;
+var left;
+var right;
+var up;
+var down;
+
+var velX = 0,
+	velY = 0,
+	key = {
+		left: false,
+		right: false,
+		up: false,
+		down: false
+	},
+	maxSpeed = 5;
+
+
+
+function setKeys(){
+	if(localStorage.getItem("wasdKeys")){
+		var left = 65,
+			right = 68,
+			up = 87,
+			down = 83;
+	} else if(localStorage.getItem("arrowKeys")){
+		var left = 37,
+			right = 39,
+			up = 38,
+			down = 40;
+	}
+}
+
 var pauseActive = false;
 var renderer = PIXI.autoDetectRenderer(w, h, {
     backgroundColor: 0x607D8B
@@ -37,10 +62,6 @@ dot.position.x = dotX;
 dot.position.y = dotY;
 stage.addChild(dot);
 
-window.onresize = function(e) {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-}
 window.onkeydown = function(e) {
     if (e.keyCode == 27) {
         pause();
@@ -54,11 +75,22 @@ window.onload = function init() {
     renderer.render(stage);
 }
 
+function settingsPrompt(){
+	var asdf = prompt("wasdKeys or arrowKeys");
+	if(asdf === "arrowKeys"){
+		localStorage.setItem("wasdKeys", false);
+		localStorage.setItem("arrowKeys", true);
+		localStorage.setItem("clickTap", false);
+	}
+	setKeys();
+}
+
 function gameLoop() {
     checkKey();
     dotX += velX;
     dotY += velY;
     velX *= 0.99;
+	setKeys();
     velY *= 0.99;
     dot.position.x = dotX;
     dot.position.y = dotY;
