@@ -136,7 +136,7 @@ button {
 .pause-buttons:active {
     background-color: #bdbdbd
 }
-#toggle-button {
+.toggle-buttons {
     width: 40px;
     height: 40px;
     margin: 4px;
@@ -148,14 +148,21 @@ button {
     background-repeat: no-repeat;
     background-position: center;
 }
-#toggle-button:active {
+.toggle-buttons:active {
     background-color: #BF360C
 }
-#toggle-background {
+.toggle-background {
     width: 48px;
     height: 48px;
     float: left;
 }
+#menu-toggle-button {
+	background-image: url('../images/ic_menu_black_48dp.png');
+}
+#pause-button {
+    /*background-image: url('../images/ic_menu_black_48dp.png');*/
+}
+
 #menu {
     position: fixed;
     width: 100%;

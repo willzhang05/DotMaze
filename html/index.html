@@ -9,33 +9,39 @@
     <link href="../styles/main.css" rel="stylesheet"/>
     <title>Dot Maze</title>
 </head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+	$(".pause-buttons").css("cursor", "default");
+	$(".pause-buttons").attr("disabled", "true");
+</script>
 <body>
 	<div id="sidebar-wrapper">
 		<div id="sidebar">
 		</div>
 	</div>
 	<div id="start-wrapper">
-		<button id="start-button" onclick="gameLoop()">START</button>
+		<button id="start-button" onclick="start()">START</button>
 	</div>
 	<div id="pause-wrapper">
 		<div id="pause">
-			<button class="pause-buttons">Resume</button>
+			<button class="pause-buttons" onclick="resume()">Resume</button>
 			<button class="pause-buttons">Settings</button>
 			<button class="pause-buttons" onclick="javascript:self.close()">Quit</button>
 		</div>
 	</div>
     <div id="wrapper">
         <div id="menu">
-        	<div id="toggle-background">
-        		<button id="toggle-button">
-        		</button>
+        	<div class="toggle-background">
+        		<button class="toggle-buttons" id="menu-toggle-button"></button>
            	</div>
            	<div id="name">Dot Maze</div>
+			<!--<div class="toggle-background">
+        		<button class="toggle-buttons" id="pause-button"></button>
+           	</div>-->
         </div>
 		<div id="content-wrapper">
             <div id="content">
-				<script src="../scripts/pixi.min.js"></script>
+				<canvas width="2560" height="1440" id="game">
+				</canvas>
 				<script src="../scripts/game.js"></script>
             </div>
         </div>

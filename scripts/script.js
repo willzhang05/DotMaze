@@ -18,12 +18,12 @@ for (var i = 0; i < 4; i++) {
     parent.appendChild(template);
 }
 $(function() {
-    $("#toggle-button").click(function() {
+    $("#menu-toggle-button").click(function() {
         $("#sidebar-wrapper").animate({
             left: '+=200'
         }, 'fast');
     });
-    $("#toggle-button").focusout(function() {
+    $("#menu-toggle-button").focusout(function() {
         $("#sidebar-wrapper").animate({
             left: '-=200'
         }, 'fast');
