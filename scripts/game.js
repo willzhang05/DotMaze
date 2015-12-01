@@ -1,3 +1,4 @@
+"use strict";
 (function() {
     var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
         window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
@@ -13,8 +14,8 @@ var left = 65,
 	esc = 27;
 var dotX = 0,
     dotY = 10,
-	dotW = $("#game").attr("width")/20,
-	dotH = $("#game").attr("width")/10;
+	dotW = $("#game").attr("width")/30,
+	dotH = $("#game").attr("width")/30,
     velX = 0,
     velY = 0,
     key = {
@@ -24,7 +25,7 @@ var dotX = 0,
         down: false,
 		esc: false
     },
-    maxSpeed = 10;
+    maxSpeed = 5;
 var pauseActive = false;
 var canvas = document.getElementById("game");
 var context = canvas.getContext("2d");
@@ -70,7 +71,6 @@ function gameLoop() {
     velY *= 0.99;
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.drawImage(dot, dotX, dotY, dotW, dotH);
-	console.log(dotW)
     requestAnimationFrame(gameLoop);
 }
 

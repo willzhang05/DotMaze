@@ -6,7 +6,7 @@
     <meta content="William Zhang" name="author"/>
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <link href="../images/favicon.ico" rel="icon" type="image/ico"/>
-    <link href="../styles/main.css" rel="stylesheet"/>
+    <link href="../styles/main-min.css" rel="stylesheet"/>
     <title>Dot Maze</title>
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
@@ -39,9 +39,11 @@
            	</div>-->
         </div>
 		<div id="content-wrapper">
-            <div id="content">
-				<canvas width="2560" height="1440" id="game">
-				</canvas>
+            <div id="content" style="margin:-15px">
+				<div id="game-wrapper">
+					<canvas width="2560" height="1440" id="game">
+					</canvas>
+				</div>
 				<script src="../scripts/game.js"></script>
             </div>
         </div>

@@ -226,10 +226,19 @@ button {
     padding-top: 15px;
     padding-bottom: 15px;
 }
+
+#game-wrapper {
+	position: relative;
+	max-width: 3840px;
+	min-width: 320px;
+	margin: 0 auto;
+}
 #game {
     width: 100%;
-    height: calc(100vh - 48px);
-    position: relative;
+    height: auto;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 #pause-wrapper {
     width: 100%;
