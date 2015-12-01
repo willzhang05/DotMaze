@@ -1,3 +1,5 @@
+"use strict";
+var toggled = false;
 for (var i = 0; i < 4; i++) {
     var parent = document.getElementById("sidebar");
     var template = document.createElement("button");
@@ -18,16 +20,20 @@ for (var i = 0; i < 4; i++) {
     parent.appendChild(template);
 }
 $(function() {
-    $("#toggle-button").click(function() {
+    $("#menu-toggle-button").click(function() {
         $("#sidebar-wrapper").animate({
             left: '+=200'
         }, 'fast');
+		toggled = true;
     });
-    $("#toggle-button").focusout(function() {
-        $("#sidebar-wrapper").animate({
-            left: '-=200'
-        }, 'fast');
-    });
+	$("body > *").not("#sidebar-wrapper, #sidebar, #menu-buttons").mousedown(function() {
+		if(toggled) {
+			$("#sidebar-wrapper").animate({
+				left: '-=200'
+			}, 'fast');
+			toggled = false;
+		}
+	});
     $("#start-button").click(function() {
         $("#start-wrapper").fadeOut(500, function() {
             $("#start-wrapper").remove()
