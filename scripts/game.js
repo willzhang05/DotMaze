@@ -52,7 +52,7 @@ function start(){
 	dot.onload = function(){
 		context.drawImage(dot, dotX, dotY, dotW, dotH);
 	}
-	dot.src = "../images/sprite-fullsize.png"
+	dot.src = "images/sprite-fullsize.png"
 	gameLoop();
 }
 
