@@ -212,12 +212,13 @@ button {
 }
 #content-wrapper {
     width: 100%;
-    min-height: calc(100vh - 48px);
+    height: calc(100vh - 48px);
     margin-top: 48px;
     text-align: center;
+    background-color: #424242;
 }
 #content {
-    min-height: calc(100vh - 48px);
+    height: calc(100vh - 78px);
     font-size: 20px;
     padding: 15px;
     text-align: left;
@@ -229,14 +230,15 @@ button {
 
 #game-wrapper {
 	position: relative;
+    min-width: calc(100vw - 60px);
 	max-width: 3840px;
-	min-width: 320px;
+    max-height: calc(100vh - 78px);
 	margin: 0 auto;
+    background-color: #607D8B;
 }
 #game {
     width: 100%;
-    height: auto;
-	position: absolute;
+    height: calc(100vh - 78px);
 	top: 0;
 	left: 0;
 }

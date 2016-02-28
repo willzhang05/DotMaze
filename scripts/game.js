@@ -12,10 +12,10 @@ var left = 65,
     up = 87,
     down = 83,
 	esc = 27;
-var dotX = 0,
+var dotX = 10,
     dotY = 10,
-	dotW = $("#game").attr("width")/30,
-	dotH = $("#game").attr("width")/30,
+	dotW = $("#game-wrapper").width()/25 < 96 ? 96 : $("#game-wrapper").width()/25,
+	dotH = $("#game-wrapper").width()/25 < 96 ? 96 : $("#game-wrapper").width()/25,
     velX = 0,
     velY = 0,
     key = {
@@ -34,6 +34,8 @@ var dot = new Image();
 window.onresize = function(e) {
     var w = window.innerWidth;
     var h = window.innerHeight;
+    dotW = $("#game-wrapper").width()/25 < 96 ? 96 : $("#game-wrapper").width()/25;
+	dotH = $("#game-wrapper").width()/25 < 96 ? 96 : $("#game-wrapper").width()/25;
 }
 window.onkeydown = function(e) {
     key[e.keyCode] = true;
@@ -65,13 +67,15 @@ function resume(){
 
 function gameLoop() {
     checkKey();
-    dotX += velX;
-    dotY += velY;
-    velX *= 0.99;
-    velY *= 0.99;
-	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.drawImage(dot, dotX, dotY, dotW, dotH);
-    requestAnimationFrame(gameLoop);
+    if(checkBounds()) {
+        dotX += velX;
+        dotY += velY;
+        velX *= 0.99;
+        velY *= 0.99;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+        context.drawImage(dot, dotX, dotY, dotW, dotH);
+        requestAnimationFrame(gameLoop);
+    }
 }
 
 function pause() {
@@ -112,6 +116,16 @@ function checkKey() {
             velY += 0.5;
         }
     }
+}
+
+function checkBounds() {
+    if(dotX + (dotW / 2) < 15 || dotY + (dotH / 2) < 15) {
+        velX = 0;
+        velY = 0;
+        alert("asdf")
+        return false;
+    }
+    return true;
 }
 
 function renderMaze() {
